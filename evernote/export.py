@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 import xml.etree.ElementTree as ET
 import argparse
 import os
@@ -46,7 +47,8 @@ def convert(in_file, out_file):
     with open(out_file, 'w') as out_fp:
         print("writing to "+out_file+"...")
         for text in root.itertext():
-            out_fp.write(text+"\n")
+            out_fp.write(text)
+            out_fp.write('\n')
         print("write over")
 
 def start_transfer(cfg):
@@ -57,6 +59,7 @@ def start_transfer(cfg):
         print("directory already exists, the transfer file will overwrite the same existed file")
     patch_files = patch_transfer_file(cfg)
     for in_file, out_file in patch_files:
+        print('in_file:', in_file, 'out_file:', out_file)
         convert(in_file, out_file)
 
 class Config(object):
